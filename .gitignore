@@ -3,8 +3,13 @@ __pycache__/
 *.py[oc]
 build/
 dist/
+data/
 wheels/
 *.egg-info
 
 # Virtual environments
 .venv
+
+# Downloaded Olist source data
+data/*.csv
+data/*.zip

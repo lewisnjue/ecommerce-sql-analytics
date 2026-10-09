@@ -266,8 +266,8 @@ Create a reproducible PostgreSQL development environment.
 
 ### Tasks
 
-* [ ] Create Git repository
-* [ ] Initialize project structure
+* [ done ] Create Git repository
+* [ done ] Initialize project structure
 * [ ] Create `.gitignore`
 * [ ] Create `.env.example`
 * [ ] Create Docker Compose configuration

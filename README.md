@@ -195,13 +195,9 @@ The dataset contains approximately 100,000 orders and multiple related datasets 
 
 The relational structure makes the dataset suitable for demonstrating complex SQL joins and analytical workflows.
 
-The original dataset should be downloaded separately and placed according to the instructions in:
+The Docker Compose setup downloads and extracts the dataset automatically if its CSV files are not present in `data/`.
 
-```text
-data/README.md
-```
-
-Raw source data is intentionally not committed to the repository when licensing or repository size makes that inappropriate.
+The imported tables are available in the PostgreSQL `olist` schema. Raw source data is kept in `data/` and is not needed in Git.
 
 ---
 
@@ -644,60 +640,34 @@ cd ecommerce-sql-analytics
 
 ---
 
-## 2. Configure Environment Variables
-
-Copy:
+## 2. Start PostgreSQL and Load the Dataset
 
 ```bash
-cp .env.example .env
+docker compose up --build -d && docker compose wait loader
 ```
 
-Configure the PostgreSQL credentials in `.env`.
+Compose starts PostgreSQL, downloads and extracts the dataset if needed, creates the `olist` tables and relationships, and imports the CSV data. The command waits until loading is complete; PostgreSQL remains running.
 
-Never commit `.env` to Git.
-
----
-
-## 3. Start PostgreSQL
+The equivalent bootstrap script is:
 
 ```bash
-docker compose up -d
+bash download.sh
 ```
 
-Verify that the container is running:
+Check service status and loader output:
 
 ```bash
 docker compose ps
+docker compose logs loader
 ```
 
----
+## 3. Connect to PostgreSQL
 
-## 4. Connect to PostgreSQL
-
-Use either:
-
-* `psql`
-* DBeaver
-* pgAdmin
-* Another PostgreSQL-compatible client
-
-Connection details are defined by the project's environment configuration.
+Defaults: host `localhost`, port `5432`, database `olist_analytics`, username `olist`, password `olist`. Override these with `POSTGRES_PORT`, `POSTGRES_DB`, `POSTGRES_USER`, and `POSTGRES_PASSWORD` environment variables.
 
 ---
 
-## 5. Load the Dataset
-
-Follow:
-
-```text
-data/README.md
-```
-
-Then execute the SQL scripts in the documented order.
-
----
-
-## 6. Run the Analysis
+## 4. Run the Analysis
 
 The SQL files are organized according to the analytical workflow.
 
