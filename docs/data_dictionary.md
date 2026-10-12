@@ -25,6 +25,8 @@
 | | `product_length_cm` | `float64()` | product lenght in cm  | NO | |
 | | `product_height_cm` | `float64()` | product height in cm | NO | |
 | | `product_width_cm` | `float64()` | product width in cm | NO | |
-
-
+| `product_category_name_translation.` |  `id` | `INT GENERATED ALWAYS AS IDENTITY` | Auto-incrementing surrogate key| *NO** | Primary Key |
+| | 
+| | `product_category_name` | TEXT | product category name  | NO | |
+| | `product_category_name_english` | TEXT | product category name english | NO | |
 
