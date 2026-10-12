@@ -11,4 +11,5 @@
 | | `geolocation_lat` | `DOUBLE PRECISION` |  latitude | NO | | 
 | | `geolocation_lng` | `DOUBLE PRECISION` | longitude | NO | | 
 | | `geolocation_state` | `VARCHAR(2)` | 2 letter state code | NO | |
-
+| `seller` | `seller_id` | `VARCHAR(32)` | sellers unique id  | NO | Primary Key |
+| | ``
