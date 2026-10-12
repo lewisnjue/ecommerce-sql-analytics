@@ -6,8 +6,9 @@ from pathlib import Path
 
 import psycopg
 
-
-DATASET_URL = "https://www.kaggle.com/api/v1/datasets/download/olistbr/brazilian-ecommerce"
+DATASET_URL = (
+    "https://www.kaggle.com/api/v1/datasets/download/olistbr/brazilian-ecommerce"
+)
 DATASET_NAME = "olist_brazilian_ecommerce"
 CSV_FILES = (
     "olist_customers_dataset.csv",
@@ -72,10 +73,11 @@ def ensure_dataset(data_dir: Path) -> None:
 
 
 def import_dataset(data_dir: Path) -> None:
-    connection = psycopg.connect()
+    connection = psycopg.connect()  # ...
     try:
         with connection:
             with connection.cursor() as cursor:
+                # create the schema
                 cursor.execute(Path("/app/schema.sql").read_text())
                 cursor.execute(
                     "SELECT 1 FROM olist._dataset_imports WHERE dataset_name = %s",

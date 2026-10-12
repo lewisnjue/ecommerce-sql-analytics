@@ -268,13 +268,13 @@ Create a reproducible PostgreSQL development environment.
 
 * [ done ] Create Git repository
 * [ done ] Initialize project structure
-* [ ] Create `.gitignore`
-* [ ] Create `.env.example`
-* [ ] Create Docker Compose configuration
-* [ ] Run PostgreSQL inside Docker
-* [ ] Connect to PostgreSQL
-* [ ] Verify database persistence
-* [ ] Document how another person can start the project
+* [ done  ] Create `.gitignore`
+* [ done ] Create `.env.example`
+* [ done ] Create Docker Compose configuration
+* [ done] Run PostgreSQL inside Docker
+* [ done] Connect to PostgreSQL
+* [ done] Verify database persistence
+* [ done] Document how another person can start the project
 
 ### Deliverables
 
@@ -301,18 +301,18 @@ Before writing SQL, understand the data.
 
 ### Tasks
 
-* [ ] Download the dataset
-* [ ] Identify all source files
-* [ ] Understand each column
-* [ ] Identify primary keys
-* [ ] Identify foreign keys
-* [ ] Identify relationships
-* [ ] Determine data types
-* [ ] Identify missing values
-* [ ] Identify possible duplicate records
-* [ ] Identify timestamp fields
-* [ ] Identify categorical fields
-* [ ] Document assumptions
+* [ done] Download the dataset
+* [ done] Identify all source files
+* [ done] Understand each column
+* [ done] Identify primary keys
+* [ done] Identify foreign keys
+* [ done] Identify relationships
+* [ done] Determine data types
+* [ done] Identify missing values
+* [ done] Identify possible duplicate records
+* [ done] Identify timestamp fields
+* [ done] Identify categorical fields
+* [ done] Document assumptions
 
 ### Deliverable
 

@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS olist;
+CREATE SCHEMA IF NOT EXISTS olist; 
 
 CREATE TABLE IF NOT EXISTS olist.customers (
     customer_id TEXT PRIMARY KEY,
