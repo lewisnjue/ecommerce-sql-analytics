@@ -29,4 +29,10 @@
 | | 
 | | `product_category_name` | TEXT | product category name  | NO | |
 | | `product_category_name_english` | TEXT | product category name english | NO | |
-
+| `order_reviews` | `review_id` | | review unique id | NO | Primary Key | 
+| | `order_id` |  | forein key to the order | NO | FOREIG KEY | 
+| | `review_score` |  | the score review between 1 and 10 | NO | | 
+| | `review_comment_title` | TEXT | title for the review comment |  |  | 
+| |`review_comment_message` | TEXT | messange body of the reiew | | | 
+| | `review_creation_date` |  | date when the review was created | |  | 
+| | 
