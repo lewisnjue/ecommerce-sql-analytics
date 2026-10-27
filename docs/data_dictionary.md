@@ -27,7 +27,6 @@ geolocation: linked to customers/sellers by zip prefix only (no FK; zip is not u
 | `product_category_name` | `TEXT` | Category name in Portuguese | NO | Primary Key |
 | `product_category_name_english` | `TEXT` | Category name in English | NO | |
 
-Note: missing `pc_gamer` and `portateis_cozinha_e_preparadores_de_alimentos`. Insert them manually if you want an FK from `products`.
 
 ## 2. `customers` (file: `olist_customers_dataset.csv`, ~99,441 rows)
 
