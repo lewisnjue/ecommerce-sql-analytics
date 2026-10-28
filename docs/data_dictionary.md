@@ -49,8 +49,6 @@ geolocation: linked to customers/sellers by zip prefix only (no FK; zip is not u
 
 ## 4. `geolocation` (file: `olist_geolocation_dataset.csv`, ~1,000,163 rows)
 
-CSV column order: zip, lat, lng, city, state. Use an explicit column list in `\copy`.
-
 | Column | Data Type | Description | Nullable | Key |
 | :--- | :--- | :--- | :--- | :--- |
 | `id` | `INT GENERATED ALWAYS AS IDENTITY` | Surrogate key (the zip prefix repeats many times) | NO | Primary Key |
@@ -60,7 +58,6 @@ CSV column order: zip, lat, lng, city, state. Use an explicit column list in `\c
 | `geolocation_city` | `VARCHAR(50)` | City (spelling variants and accents are inconsistent) | NO | |
 | `geolocation_state` | `CHAR(2)` | State code | NO | |
 
-Note: heavily duplicated by zip. For analysis, aggregate to one row per zip (e.g. average lat/lng).
 
 ## 5. `products` (file: `olist_products_dataset.csv`, ~32,951 rows)
 
@@ -69,7 +66,7 @@ CSV headers contain typos (`product_name_lenght`, `product_description_lenght`, 
 | Column | Data Type | Description | Nullable | Key |
 | :--- | :--- | :--- | :--- | :--- |
 | `product_id` | `CHAR(32)` | Unique product ID | NO | Primary Key |
-| `product_category_name` | `TEXT` | Category (Portuguese) | YES (~610 nulls) | FK → `product_category_name_translation` (optional, see note) |
+| `product_category_name` | `TEXT` | Category (Portuguese) | YES (~610 nulls) | |
 | `product_name_length` | `INTEGER` | Characters in product name | YES | |
 | `product_description_length` | `INTEGER` | Characters in product description | YES | |
 | `product_photos_qty` | `INTEGER` | Number of photos | YES | |
@@ -86,7 +83,7 @@ Note: the numeric columns appear as floats in the CSV (e.g. `40.0`). Load into a
 | :--- | :--- | :--- | :--- | :--- |
 | `order_id` | `CHAR(32)` | Unique order ID | NO | Primary Key |
 | `customer_id` | `CHAR(32)` | Customer who placed the order | NO | FK → `customers(customer_id)` |
-| `order_status` | `TEXT` + `CHECK` (or enum type) | One of: delivered, invoiced, shipped, processing, unavailable, canceled, created, approved | NO | |
+| `order_status` | ENUM( One of: delivered, invoiced, shipped, processing, unavailable, canceled, created, approved) | NO | |
 | `order_purchase_timestamp` | `TIMESTAMP` | When the order was placed | NO | |
 | `order_approved_at` | `TIMESTAMP` | When payment was approved | YES (~160) | |
 | `order_delivered_carrier_date` | `TIMESTAMP` | When handed to the logistics carrier | YES (~1,783) | |
@@ -117,7 +114,6 @@ Note: the numeric columns appear as floats in the CSV (e.g. `40.0`). Load into a
 
 ## 9. `order_reviews` (file: `olist_order_reviews_dataset.csv`, ~99,224 rows)
 
-Review text contains commas, quotes and line breaks. Use `\copy ... WITH (FORMAT csv, HEADER, ENCODING 'UTF8')`.
 
 | Column | Data Type | Description | Nullable | Key |
 | :--- | :--- | :--- | :--- | :--- |
@@ -129,11 +125,3 @@ Review text contains commas, quotes and line breaks. Use `\copy ... WITH (FORMAT
 | `review_creation_date` | `TIMESTAMP` | When the satisfaction survey was sent | NO | |
 | `review_answer_timestamp` | `TIMESTAMP` | When the customer answered the survey | NO | |
 
-## Known data quirks
-
-- Zip prefixes must be read as text to keep leading zeros.
-- `geolocation` has no unique key and about 1M rows with many near-duplicates.
-- Category names in `products` are not fully covered by the translation file.
-- Some orders have no items, no payments or no reviews, and some have several of each. Use LEFT JOINs.
-- `customer_id` is unique per order. Use `customer_unique_id` to count real customers.
-- Empty strings in the CSVs should load as NULL (`NULL ''` in `\copy`).
