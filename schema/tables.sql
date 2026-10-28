@@ -1,3 +1,4 @@
+
 CREATE TABLE IF NOT EXISTS customers (
     customer_id CHAR(32) PRIMARY KEY,
     customer_unique_id CHAR(32) NOT NULL,
@@ -86,3 +87,21 @@ CREATE TABLE IF NOT EXISTS order_reviews (
     PRIMARY KEY (review_id, order_id),
     FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
+-- Indexes for Foreign Keys to speed up JOIN operations
+
+CREATE INDEX idx_order_items_order_id ON order_items(order_id);
+CREATE INDEX idx_order_items_product_id ON order_items(product_id);
+CREATE INDEX idx_order_items_seller_id ON order_items(seller_id);
+
+CREATE INDEX idx_order_payments_order_id ON order_payments(order_id);
+CREATE INDEX idx_order_reviews_order_id ON order_reviews(order_id);
+
+CREATE INDEX idx_geolocation_zip ON geolocation(geolocation_zip_code_prefix);
+-- Speed up filtering by order status or timeframes
+CREATE INDEX idx_orders_status ON orders(order_status);
+CREATE INDEX idx_orders_purchase_timestamp ON orders(order_purchase_timestamp);
+
+-- Speed up geographic and state-level aggregations
+CREATE INDEX idx_customers_state ON customers(customer_state);
+CREATE INDEX idx_sellers_state ON sellers(seller_state);
+CREATE INDEX idx_geolocation_state ON geolocation(geolocation_state);
