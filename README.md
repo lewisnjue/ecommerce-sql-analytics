@@ -67,3 +67,14 @@ checks with:
 docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < sql/05_analytics/01_exploration.sql
 docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < tests/test_exploration.sql
 ```
+
+## Phase 8: Revenue analysis
+
+The revenue definitions and results are documented in
+[docs/revenue_analysis.md](docs/revenue_analysis.md). Run the monthly trends,
+rankings, and other revenue queries with:
+
+```bash
+docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < sql/05_analytics/02_revenue.sql
+docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < tests/test_revenue.sql
+```

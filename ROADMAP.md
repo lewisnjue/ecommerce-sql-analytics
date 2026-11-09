@@ -567,6 +567,10 @@ Use:
 
 # 12. Phase 8 — Revenue Analysis
 
+**Status: Complete.** Definitions, queries, results, and validation are
+documented in [docs/revenue_analysis.md](docs/revenue_analysis.md); the
+executable analysis is [sql/05_analytics/02_revenue.sql](sql/05_analytics/02_revenue.sql).
+
 Answer:
 
 1. What is total revenue?
