@@ -1,13 +1,19 @@
 [project]
 name = "ecommerce-sql-analytics"
 version = "0.1.0"
-description = "Add your description here"
+description = "PostgreSQL analytics of the Brazilian Olist e-commerce dataset"
 readme = "README.md"
 authors = [
     { name = "lewisnjue", email = "njue.prime@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "matplotlib>=3.11.2",
+    "pandas>=3.0.6",
+    "psycopg[binary]>=3.3.8",
+    "seaborn>=0.13.2",
+    "streamlit>=1.67.0",
+]
 
 [project.scripts]
 ecommerce-sql-analytics = "ecommerce_sql_analytics:main"
@@ -19,7 +25,6 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "notebook>=7.6.3",
-    "pandas>=3.0.6",
     "pyright>=1.1.414",
     "ruff>=0.17.0",
 ]

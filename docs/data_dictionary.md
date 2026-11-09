@@ -1,6 +1,11 @@
-# Olist Brazilian E-Commerce: PostgreSQL Schema Summary
+# Olist Brazilian E-Commerce: Source Data Dictionary
 
-Source: Kaggle `olistbr/brazilian-ecommerce` (9 CSV files, UTF-8).
+Source: Kaggle `olistbr/brazilian-ecommerce` (9 CSV files, UTF-8). This
+dictionary describes source columns loaded into PostgreSQL's `public` schema.
+Analysis-ready names, derived fields, and quality flags are described in
+[the database schema](database_schema.md) and
+[analytical methodology](methodology.md); downloaded data files are not tracked
+in Git.
 
 ## Load order (respects foreign keys)
 
@@ -124,4 +129,3 @@ Note: the numeric columns appear as floats in the CSV (e.g. `40.0`). Load into a
 | `review_comment_message` | `TEXT` | Optional comment body | YES | |
 | `review_creation_date` | `TIMESTAMP` | When the satisfaction survey was sent | NO | |
 | `review_answer_timestamp` | `TIMESTAMP` | When the customer answered the survey | NO | |
-
