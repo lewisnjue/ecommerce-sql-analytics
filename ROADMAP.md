@@ -467,7 +467,9 @@ Investigate:
 
 ## Deliverable
 
-Create a formal data quality report.
+Completed: [docs/data_quality_report.md](docs/data_quality_report.md). The report
+records the problem, detection query, affected-row count, and decision without
+cleaning the raw data.
 
 Document:
 
@@ -1166,11 +1168,11 @@ Before considering the project complete:
 
 ### Data Quality
 
-* [ ] NULL checks
-* [ ] Duplicate checks
-* [ ] Referential integrity
-* [ ] Date validation
-* [ ] Value validation
+* [x] NULL checks
+* [x] Duplicate checks
+* [x] Referential integrity
+* [x] Date validation
+* [x] Value validation
 
 ### Analytics
 

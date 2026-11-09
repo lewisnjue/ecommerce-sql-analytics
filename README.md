@@ -1,5 +1,43 @@
+# E-Commerce SQL Analytics
 
+A PostgreSQL project for exploring the Brazilian Olist e-commerce dataset with
+raw SQL. The project is being built phase by phase according to
+[ROADMAP.md](ROADMAP.md).
 
-## how to start the project 
+## Start the database
 
-to start the project you will need to have `docker` and `docker compose ` installed on your system afte that you can run `docker compose up -d` to start the `container` with the `postgres` database, after that you can connect to the database, for me i usually just for simplicify i just use go inside the container and just connect using `psql` which is much simpler i dont have to install anything for posgres in my machine but you can change this if you want, also you can change the enviroment variables in the `compose.yml` if you want i just like keeping them simple for local work i use better ones when going to production 
+From the repository root, start the PostgreSQL 14 container:
+
+```bash
+docker compose up -d
+```
+
+On the first start with an empty Docker volume, `schema/init.sh` creates the
+tables and loads the CSV files in `data/`. Connect to the running database with:
+
+```bash
+docker compose exec db psql -U user -d olist
+```
+
+The credentials in `compose.yml` are for local development only.
+
+## Phase 5: Data quality investigation
+
+The raw data investigation and findings are documented in
+[docs/data_quality_report.md](docs/data_quality_report.md). The SQL is organized
+by check type in [`sql/04_quality/`](sql/04_quality/). To run a query file from
+the repository root, for example:
+
+```bash
+docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < sql/04_quality/01_null_checks.sql
+```
+
+The complete set of Phase 5 scripts is:
+
+* `01_null_checks.sql`
+* `02_duplicate_checks.sql`
+* `03_referential_integrity.sql`
+* `04_value_validation.sql`
+* `05_date_validation.sql`
+
+These queries inspect the loaded data without modifying or cleaning it.
