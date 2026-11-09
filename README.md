@@ -41,3 +41,29 @@ The complete set of Phase 5 scripts is:
 * `05_date_validation.sql`
 
 These queries inspect the loaded data without modifying or cleaning it.
+
+## Phase 6: Staging layer
+
+The staging model and refresh behavior are documented in
+[docs/staging_layer.md](docs/staging_layer.md). Create the typed tables, load
+them from the unchanged `public` source tables, and run assertions with:
+
+```bash
+docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < sql/03_staging/01_create_staging_tables.sql
+docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < sql/03_staging/02_refresh_staging.sql
+docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < tests/test_staging.sql
+```
+
+The refresh replaces only staging rows, in a transaction; it leaves the raw
+tables unchanged.
+
+## Phase 7: Exploratory SQL
+
+The current dataset overview and geographic findings are in
+[docs/exploration.md](docs/exploration.md). Run the queries and reconciliation
+checks with:
+
+```bash
+docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < sql/05_analytics/01_exploration.sql
+docker compose exec -T db psql -X -U user -d olist -v ON_ERROR_STOP=1 < tests/test_exploration.sql
+```

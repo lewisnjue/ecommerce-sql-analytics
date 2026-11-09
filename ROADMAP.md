@@ -485,16 +485,17 @@ Reason
 
 # 10. Phase 6 — Staging Layer
 
-Create cleaned/staged tables.
+**Status: Complete.** The typed staging tables and refresh workflow are
+documented in [docs/staging_layer.md](docs/staging_layer.md).
 
 The staging layer should:
 
-* Normalize data types
-* Standardize column names
-* Handle obvious data-quality issues
-* Convert timestamps appropriately
-* Create useful derived fields
-* Preserve traceability to raw data
+* [x] Normalize data types
+* [x] Standardize column names
+* [x] Handle obvious data-quality issues without silently correcting source values
+* [x] Preserve source timestamp semantics
+* [x] Create useful derived fields
+* [x] Preserve traceability to raw data
 
 Example:
 
@@ -511,6 +512,10 @@ FROM raw.orders;
 ---
 
 # 11. Phase 7 — Exploratory SQL
+
+**Status: Complete.** Queries and findings are documented in
+[docs/exploration.md](docs/exploration.md). The runnable exploration SQL is
+[sql/05_analytics/01_exploration.sql](sql/05_analytics/01_exploration.sql).
 
 Before sophisticated analytics, understand the data.
 
